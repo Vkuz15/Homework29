@@ -1,16 +1,16 @@
 package ru.hogwarts.school.model;
 
+import jakarta.persistence.Entity;
+
 import java.util.Objects;
 
+@Entity
 public class Student extends School {
 
     private int age;
-    private static long lastId;
 
-    public Student(String name, int age) {
+    public Student(String name) {
         super(name);
-        setId(++lastId);
-        this.age = age;
     }
 
     public int getAge() {

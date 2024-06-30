@@ -1,16 +1,16 @@
 package ru.hogwarts.school.model;
 
+import jakarta.persistence.Entity;
+
 import java.util.Objects;
 
+@Entity
 public class Faculty extends School {
 
     private String color;
-    private static long lastId;
 
-    public Faculty(String name, String color) {
+    public Faculty(String name) {
         super(name);
-        setId(++lastId);
-        this.color = color;
     }
 
     public String getColor() {

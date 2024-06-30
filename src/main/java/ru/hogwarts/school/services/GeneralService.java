@@ -8,7 +8,7 @@ public interface GeneralService<V> {
 
     V get(Long id);
 
-    V edit(V faculty);
+    V edit(Long id, V faculty);
 
     V delete(Long id);
 
