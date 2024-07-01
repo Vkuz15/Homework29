@@ -1,13 +1,24 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Faculty extends School {
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
+
+    private String name;
     private String color;
+
+    @OneToMany(mappedBy = "facultyStudent")
+    private List<Student> students;
 
     public Faculty(String name) {
         super(name);

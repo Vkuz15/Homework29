@@ -59,4 +59,13 @@ public class FacultyController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @GetMapping("/faculty/{color}")
+    public ResponseEntity<List<Faculty>> findByFacultyNameColor(@RequestParam("filter") String filter) {
+        List<Faculty> filteredFaculties = facultyService.findFacultyByName(filter);
+        if (filteredFaculties.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(filteredFaculties);
+    }
 }

@@ -1,13 +1,25 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.util.Objects;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Student extends School {
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
+
+    private Faculty faculty;
+    private String name;
     private int age;
+
+    @ManyToOne
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    private Faculty facultyStudent;
 
     public Student(String name) {
         super(name);
@@ -39,5 +51,9 @@ public class Student extends School {
         return "Student{" +
                 "age=" + age +
                 '}';
+    }
+
+    public Faculty getService() {
+        return this.faculty;
     }
 }

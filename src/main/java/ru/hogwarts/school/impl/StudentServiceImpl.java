@@ -9,7 +9,7 @@ import ru.hogwarts.school.services.StudentService;
 import java.util.*;
 
 @Service
-public class StudentServiceImpl implements StudentService {
+public final class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
@@ -19,6 +19,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student add(Student student) {
+        student.setId(null);
         return studentRepository.save(student);
     }
 
@@ -54,7 +55,17 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudentsAge(int age) {
-        return studentRepository.findStudentsByAge(age);
+    public List<Student> getAllStudentsAge(int minAge, int maxAge) {
+        if (minAge > maxAge) {
+            throw new IllegalArgumentException("Некорректно задан промежуток возраста");
+        }
+        return studentRepository.findStudentsByAge(minAge, maxAge);
+    }
+
+    @Override
+    public Faculty getFaculty(Long id) {
+        return studentRepository.findById(id)
+                                .map(Student::getService)
+                                .orElse(null);
     }
 }

@@ -8,7 +8,7 @@ import ru.hogwarts.school.services.FacultyService;
 import java.util.List;
 
 @Service
-public class FacultyServiceImpl implements FacultyService {
+public final class FacultyServiceImpl implements FacultyService {
 
     private final FacultyRepository facultyRepository;
 
@@ -18,6 +18,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public Faculty add(Faculty faculty) {
+        faculty.setId(null);
         return facultyRepository.save(faculty);
     }
 
@@ -55,5 +56,10 @@ public class FacultyServiceImpl implements FacultyService {
     @Override
     public List<Faculty> getAllFacultyColor(String color) {
         return facultyRepository.findFacultiesByColor(color);
+    }
+
+    @Override
+    public List<Faculty> findFacultyByName(String filter) {
+        return List.of();
     }
 }
