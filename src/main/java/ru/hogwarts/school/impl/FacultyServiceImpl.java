@@ -5,6 +5,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.services.FacultyService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,6 +61,12 @@ public final class FacultyServiceImpl implements FacultyService {
 
     @Override
     public List<Faculty> findFacultyByName(String filter) {
-        return List.of();
+        List<Faculty> filteredFaculties = new ArrayList<>();
+        for (Faculty faculty : getAll()) {
+            if (faculty.getName().contains(filter)) {
+                filteredFaculties.add(faculty);
+            }
+        }
+        return filteredFaculties;
     }
 }

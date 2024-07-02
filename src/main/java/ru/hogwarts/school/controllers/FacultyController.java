@@ -68,4 +68,13 @@ public class FacultyController {
         }
         return ResponseEntity.ok(filteredFaculties);
     }
+
+    @GetMapping("/faculty/{name}")
+    public ResponseEntity<List<Faculty>> findByFacultyName(@RequestParam("filter") String filter) {
+        List<Faculty> filteredFaculties = facultyService.findFacultyByName(filter);
+        if (filteredFaculties.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(filteredFaculties);
+    }
 }
