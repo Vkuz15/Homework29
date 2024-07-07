@@ -1,13 +1,12 @@
 package ru.hogwarts.school.model;
 
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class Student extends School {
+public class Student extends School{
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -16,6 +15,10 @@ public class Student extends School {
     private Faculty faculty;
     private String name;
     private int age;
+
+    @OneToOne(mappedBy = "student")
+    @JoinColumn(name = "student_id")
+    private Avatar avatar;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
@@ -55,5 +58,9 @@ public class Student extends School {
 
     public Faculty getService() {
         return this.faculty;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
     }
 }
