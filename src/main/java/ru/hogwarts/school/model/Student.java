@@ -12,8 +12,8 @@ public class Student extends School{
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "VARCHAR(255)")
     private Faculty faculty;
-    private String name;
     private int age;
 
     @OneToOne(mappedBy = "student")
@@ -24,8 +24,7 @@ public class Student extends School{
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     private Faculty facultyStudent;
 
-    public Student(String name) {
-        super(name);
+    public Student(Long id, String name, Integer age) {
     }
 
     public int getAge() {

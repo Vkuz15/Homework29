@@ -13,17 +13,19 @@ public class Faculty extends School {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(columnDefinition = "VARCHAR(255)")
+    private Faculty faculty;
+
     private String color;
 
     @OneToMany(mappedBy = "facultyStudent")
     private List<Student> students;
 
     public Faculty(String name) {
-        super(name);
     }
 
     public String getColor() {
+        this.color = color;
         return color;
     }
 

@@ -10,4 +10,6 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findStudentsByAge(int minAge, int maxAge);
+
+    List<Student> findStudentsAge(int age);
 }

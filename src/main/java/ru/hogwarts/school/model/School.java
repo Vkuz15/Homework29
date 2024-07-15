@@ -1,9 +1,6 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -15,9 +12,15 @@ public abstract class School {
     private Long id;
 
     private String name;
+    private String color;
 
-    public School(String name) {
+    public School(Long id, String name, String color) {
+        this.id = id;
         this.name = name;
+        this.color = color;
+    }
+
+    protected School() {
     }
 
     public Long getId() {
@@ -47,5 +50,10 @@ public abstract class School {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    public String getColor(String color) {
+        this.color = color;
+        return color;
     }
 }
