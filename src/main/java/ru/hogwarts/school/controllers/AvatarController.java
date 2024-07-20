@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import static jakarta.servlet.http.HttpServletResponse.*;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
@@ -70,5 +71,11 @@ public class AvatarController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Ошибка");
         }
+    }
+
+    @GetMapping("/page-list")
+    public ResponseEntity<List<Avatar>> getAllAvatar(@RequestParam("page") Integer pageNumber, @RequestParam("size") Integer pageSize) {
+        List<Avatar> avatar = avatarService.getAllAvatar(pageNumber, pageSize);
+        return ResponseEntity.ok(avatar);
     }
 }

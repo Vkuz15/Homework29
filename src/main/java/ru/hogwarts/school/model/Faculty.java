@@ -21,11 +21,10 @@ public class Faculty extends School {
     @OneToMany(mappedBy = "facultyStudent")
     private List<Student> students;
 
-    public Faculty(String name) {
+    public Faculty() {
     }
 
     public String getColor() {
-        this.color = color;
         return color;
     }
 

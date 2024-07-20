@@ -28,7 +28,7 @@ class FacultyControllerTest {
 
     @Test
     void addFaculty() {
-        Faculty faculty = new Faculty("Griffendor");
+        Faculty faculty = new Faculty();
         faculty.setColor("Orange");
 
         Faculty facultySave = testRestTemplate.postForObject("/faculty", faculty, Faculty.class);
@@ -45,7 +45,7 @@ class FacultyControllerTest {
 
     @Test
     void getFaculty() {
-        Faculty faculty = new Faculty("Griffendor");
+        Faculty faculty = new Faculty();
         faculty.setColor("Orange");
 
         Faculty facultySave = testRestTemplate.postForObject("/faculty", faculty, Faculty.class);
@@ -69,14 +69,14 @@ class FacultyControllerTest {
     @Test
     void getAllFaculty() {
         {
-            Faculty faculty = new Faculty("Griffendor");
+            Faculty faculty = new Faculty();
             faculty.setColor("Orange");
 
             Faculty facultySave = testRestTemplate.postForObject("/faculty", faculty, Faculty.class);
             System.out.println(facultySave.getId());
         }
         {
-            Faculty faculty = new Faculty("Slizerin");
+            Faculty faculty = new Faculty();
             faculty.setColor("Green");
 
             Faculty facultySave = testRestTemplate.postForObject("/faculty", faculty, Faculty.class);
@@ -91,7 +91,7 @@ class FacultyControllerTest {
 
     @Test
     void getAllFacultyColor() {
-        Faculty faculty = new Faculty("Slizerin");
+        Faculty faculty = new Faculty();
         faculty.setColor("Green");
 
         Faculty facultySave = testRestTemplate.postForObject("/faculty", faculty, Faculty.class);
@@ -104,7 +104,7 @@ class FacultyControllerTest {
 
     @Test
     void editFaculty() {
-        Faculty faculty = new Faculty("Griffendor");
+        Faculty faculty = new Faculty();
         faculty.setColor("Orange");
 
         Faculty facultySave = testRestTemplate.postForObject("/faculty", faculty, Faculty.class);
@@ -120,7 +120,7 @@ class FacultyControllerTest {
 
     @Test
     void deleteFaculty() {
-        Faculty faculty = new Faculty("Griffendor");
+        Faculty faculty = new Faculty();
         faculty.setColor("Orange");
 
         Faculty facultySave = testRestTemplate.postForObject("/faculty", faculty, Faculty.class);

@@ -5,6 +5,7 @@ import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.AvatarDto;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface AvatarService{
 
@@ -14,4 +15,5 @@ public interface AvatarService{
 
     void save(Long studentId, MultipartFile multipartFile) throws IOException;
 
+    List<Avatar> getAllAvatar(Integer pageNumber, Integer pageSize);
 }

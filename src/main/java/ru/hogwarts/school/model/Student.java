@@ -24,7 +24,7 @@ public class Student extends School{
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     private Faculty facultyStudent;
 
-    public Student(Long id, String name, Integer age) {
+    public Student() {
     }
 
     public int getAge() {

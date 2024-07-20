@@ -1,6 +1,7 @@
 package ru.hogwarts.school.impl;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.exceptions.StudentNotFoundException;
@@ -14,6 +15,7 @@ import ru.hogwarts.school.services.AvatarService;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.UUID;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -88,5 +90,11 @@ public final class AvatarServiceImpl implements AvatarService {
         avatar.setMediaType(multipartFile.getContentType());
         avatar.setData(multipartFile.getBytes());
         return avatar;
+    }
+
+    @Override
+    public List<Avatar> getAllAvatar(Integer pageNumber, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
+        return avatarRepository.findAll(pageRequest).getContent();
     }
 }

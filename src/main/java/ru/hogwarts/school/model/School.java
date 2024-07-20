@@ -53,7 +53,10 @@ public abstract class School {
     }
 
     public String getColor(String color) {
-        this.color = color;
         return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

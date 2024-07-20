@@ -44,7 +44,7 @@ public class StudentControllerTest {
         final String name = "Potter";
         final int age = 21;
 
-        Student student = new Student(1L, "Potter", 21);
+        Student student = new Student();
         student.setName(name);
         student.setId(id);
         student.setAge(age);
@@ -61,7 +61,7 @@ public class StudentControllerTest {
 
     @Test
     void getAllStudent() throws Exception {
-        List<Student> students = List.of(new Student(1L, "Potter", 21));
+        List<Student> students = List.of(new Student());
 
         when(repository.findAll()).thenReturn(students);
 
@@ -72,7 +72,7 @@ public class StudentControllerTest {
 
     @Test
     void getAllStudentsAge() throws Exception {
-        List<Student> students = List.of(new Student(1L, "Potter", 21));
+        List<Student> students = List.of(new Student());
 
         when(repository.findStudentsAge(any(Integer.class))).thenReturn(students);
 
@@ -91,7 +91,7 @@ public class StudentControllerTest {
         studentObject.put("name", name);
         studentObject.put("age", age);
 
-        Student student = new Student(1L, "Potter", 21);
+        Student student = new Student();
         student.setName(name);
         student.setId(id);
         student.setAge(age);
@@ -121,7 +121,7 @@ public class StudentControllerTest {
         studentObject.put("name", name);
         studentObject.put("age", age);
 
-        Student student = new Student(1L, "Potter", 21);
+        Student student = new Student();
         student.setName(name);
         student.setId(id);
         student.setId(id);
@@ -149,7 +149,7 @@ public class StudentControllerTest {
         studentObject.put("name", name);
         studentObject.put("age", age);
 
-        Student student = new Student(1L, "Potter", 21);
+        Student student = new Student();
         student.setName(name);
         student.setId(id);
         student.setAge(age);
