@@ -1,7 +1,7 @@
 package ru.hogwarts.school.impl;
 
 import org.springframework.stereotype.Service;
-import ru.hogwarts.school.entity.ExpenseByStudent;
+import ru.hogwarts.school.entity.ExpenseByStudentService;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.services.ExpenseService;
@@ -29,7 +29,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         studentRepository.deleteById(id);
     }
 
-    public List<ExpenseByStudent> getExpensesAllStudents() {
+    public List<ExpenseByStudentService> getExpensesAllStudents() {
         return studentRepository.getExpensesAllStudents();
     }
 

@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.hogwarts.school.entity.ExpenseByStudent;
+import ru.hogwarts.school.entity.ExpenseByStudentService;
 import ru.hogwarts.school.impl.ExpenseServiceImpl;
 import ru.hogwarts.school.model.Student;
 
@@ -21,8 +21,8 @@ public class ExpenseByStudentController {
     }
 
     @GetMapping("/by-students")
-    public ResponseEntity<List<ExpenseByStudent>> getExpensesByStudents() {
-        List<ExpenseByStudent> students = expenseService.getExpensesAllStudents();
+    public ResponseEntity<List<ExpenseByStudentService>> getExpensesByStudents() {
+        List<ExpenseByStudentService> students = expenseService.getExpensesAllStudents();
         return ResponseEntity.ok(students);
     }
 

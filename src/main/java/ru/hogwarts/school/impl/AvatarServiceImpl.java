@@ -3,6 +3,7 @@ package ru.hogwarts.school.impl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.exceptions.StudentNotFoundException;
 import ru.hogwarts.school.model.Avatar;
@@ -93,7 +94,10 @@ public final class AvatarServiceImpl implements AvatarService {
     }
 
     @Override
-    public List<Avatar> getAllAvatar(Integer pageNumber, Integer pageSize) {
+    public List<Avatar> getAllAvatar(@RequestParam("page") Integer pageNumber, @RequestParam("size") Integer pageSize) {
+        if (pageNumber < 1) {
+            throw new IllegalArgumentException("Номер страницы должен быть больше 0");
+        }
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }

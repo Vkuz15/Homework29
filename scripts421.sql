@@ -1,0 +1,10 @@
+ALERT TABLE student
+ADD CONSTRAINT age INTEGER CHECK (age > 16),
+ALERT COLUMN name SET NOT NULL,
+ADD CONSTRAINT name_unique UNIQUE (name);
+
+ALERT TABLE faculty
+ADD CONSTRAINT faculty_unique UNIQUE (name, color);
+
+CREATE TABLE student
+ADD CONSTRAINT student_age INTEGER DEFAULT (age = 20);
