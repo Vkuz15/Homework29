@@ -1,5 +1,5 @@
 CREATE TABLE public.cars (
-        cars_id INTEGER NULL,
+        cars_id SERIAL PRIMARY KEY,
         cars_brand VARCHAR NULL,
         cars_model VARCHAR NULL,
         cars_price NUMERIC NULL
@@ -12,7 +12,7 @@ ADD CONSTRAINT cars_price_constraint CHECK (cars_price > 0);
 ALERT TABLE cars ADD PRIMARY KEY (cars_id);
 
 CREATE TABLE public.person (
-        person_id INTEGER NULL,
+        person_id SERIAL PRIMARY KEY,
         person_name VARCHAR NULL,
         person_age INTEGER NULL,
         person_driver_license BOOLEAN NULL
