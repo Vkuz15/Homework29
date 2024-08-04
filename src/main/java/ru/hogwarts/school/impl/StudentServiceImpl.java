@@ -1,5 +1,7 @@
 package ru.hogwarts.school.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -13,24 +15,29 @@ public final class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
+    private final Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
+
     public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     @Override
     public Student add(Student student) {
+        logger.info("The Student has been added to application");
         student.setId(null);
         return studentRepository.save(student);
     }
 
     @Override
     public Student get(Long id) {
+        logger.info("Received the student of ID");
         return studentRepository.findById(id)
                 .orElse(null);
     }
 
     @Override
     public Student edit(Long id, Student student) {
+        logger.info("The Student has been updated");
         return studentRepository.findById(id)
                 .map(facultyDb -> {
                     student.setId(id);
@@ -41,6 +48,7 @@ public final class StudentServiceImpl implements StudentService {
 
     @Override
     public Student delete(Long id) {
+        logger.info("The Student of ID has been deleted");
         return studentRepository.findById(id)
                 .map(faculty -> {
                     studentRepository.deleteById(id);
@@ -51,11 +59,13 @@ public final class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getAll() {
+        logger.info("All students have been received");
         return studentRepository.findAll();
     }
 
     @Override
     public List<Student> getAllStudentsAge(int minAge, int maxAge) {
+        logger.info("A Students is received between the minimum and maximum years");
         if (minAge > maxAge) {
             throw new IllegalArgumentException("Некорректно задан промежуток возраста");
         }
@@ -64,6 +74,7 @@ public final class StudentServiceImpl implements StudentService {
 
     @Override
     public Faculty getFaculty(Long id) {
+        logger.info("Get Faculty by ID {}", id);
         return studentRepository.findById(id)
                                 .map(Student::getService)
                                 .orElse(null);
