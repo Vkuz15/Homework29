@@ -65,6 +65,16 @@ public class StudentController {
         return studentService.getLongValue();
     }
 
+    @GetMapping(path = "/print-parallel")
+    public void getStudentsNamePrintParallel() {
+        studentService.getStudentsNamePrintParallel();
+    }
+
+    @GetMapping(path = "/print-synchronized")
+    public void getStudentsNamePrintSynchronized() {
+        studentService.getStudentsNamePrintSynchronized();
+    }
+
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Long id, @RequestBody Student student) {
         Student editStudent = studentService.edit(id, student);

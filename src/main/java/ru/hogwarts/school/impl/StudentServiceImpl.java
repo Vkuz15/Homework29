@@ -17,6 +17,8 @@ public final class StudentServiceImpl implements StudentService {
 
     private final Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
 
+    private final Object syncObject = new Object();
+
     public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
@@ -110,5 +112,54 @@ public final class StudentServiceImpl implements StudentService {
         }
         logger.info(result + " Время выполнения - " + (System.currentTimeMillis() - start + " миллисек"));
         return result;
+    }
+
+    @Override
+    public void getStudentsNamePrintParallel() {
+        logger.info("Called method getStudentsNamePrintParallel");
+        List<Student> students = studentRepository.findAll();
+
+        if (students.size() >= 6) {
+            logger.info(students.get(0).getName());
+            logger.info(students.get(1).getName());
+
+            Thread thread1 = new Thread(() -> {
+                logger.info(students.get(2).getName());
+                logger.info(students.get(3).getName());
+            });
+
+            Thread thread2 = new Thread(() -> {
+                logger.info(students.get(4).getName());
+                logger.info(students.get(5).getName());
+            });
+
+            thread1.start();
+            thread2.start();
+        }
+    }
+
+    @Override
+    public void getStudentsNamePrintSynchronized() {
+        logger.info("Called method getStudentsNamePrintSynchronized");
+        List<Student> students = studentRepository.findAll();
+
+        printName(students.get(0).getName());
+        printName(students.get(1).getName());
+
+        new Thread(() -> {
+            printName(students.get(2).getName());
+            printName(students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            printName(students.get(4).getName());
+            printName(students.get(5).getName());
+        }).start();
+    }
+
+    private void printName(String name) {
+        synchronized (syncObject) {
+            logger.info(name);
+        }
     }
 }

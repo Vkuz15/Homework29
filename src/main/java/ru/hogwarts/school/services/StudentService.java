@@ -16,4 +16,8 @@ public interface StudentService extends GeneralService<Student>{
     Double getAverageAgeStudents();
 
     Long getLongValue();
+
+    void getStudentsNamePrintParallel();
+
+    void getStudentsNamePrintSynchronized();
 }
