@@ -8,6 +8,7 @@ import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.services.FacultyService;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -79,5 +80,16 @@ public final class FacultyServiceImpl implements FacultyService {
             }
         }
         return filteredFaculties;
+    }
+
+    @Override
+    public String getFacultyWithLongName() {
+        logger.info("Called method getFacultyWithLongName");
+        return facultyRepository.findAll().stream()
+                .parallel()
+                .map(Faculty::getName)
+                .sorted(String::compareTo)
+                .max(Comparator.comparingInt(String::length))
+                .orElse("");
     }
 }
