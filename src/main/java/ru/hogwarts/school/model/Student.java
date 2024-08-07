@@ -1,16 +1,30 @@
 package ru.hogwarts.school.model;
 
+import jakarta.persistence.*;
 import java.util.Objects;
 
-public class Student extends School {
+import static jakarta.persistence.GenerationType.IDENTITY;
 
+@Entity
+public class Student extends School{
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
+
+    @Column(columnDefinition = "VARCHAR(255)")
+    private Faculty faculty;
     private int age;
-    private static long lastId;
 
-    public Student(String name, int age) {
-        super(name);
-        setId(++lastId);
-        this.age = age;
+    @OneToOne(mappedBy = "student")
+    @JoinColumn(name = "student_id")
+    private Avatar avatar;
+
+    @ManyToOne
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    private Faculty facultyStudent;
+
+    public Student() {
     }
 
     public int getAge() {
@@ -39,5 +53,13 @@ public class Student extends School {
         return "Student{" +
                 "age=" + age +
                 '}';
+    }
+
+    public Faculty getService() {
+        return this.faculty;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
     }
 }

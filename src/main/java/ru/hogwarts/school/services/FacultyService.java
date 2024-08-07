@@ -7,4 +7,8 @@ import java.util.List;
 public interface FacultyService extends GeneralService<Faculty> {
 
     List<Faculty> getAllFacultyColor(String color);
+
+    List<Faculty> findFacultyByName(String filter);
+
+    String getFacultyWithLongName();
 }
