@@ -10,4 +10,10 @@ public interface StudentService extends GeneralService<Student>{
     List<Student> getAllStudentsAge(int minAge, int maxAge);
 
     Faculty getFaculty(Long id);
+
+    List<String> getStudentsWhoseNameStartsWith(String letter);
+
+    Double getAverageAgeStudents();
+
+    Long getLongValue();
 }

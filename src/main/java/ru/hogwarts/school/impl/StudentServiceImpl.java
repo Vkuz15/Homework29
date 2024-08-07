@@ -79,4 +79,36 @@ public final class StudentServiceImpl implements StudentService {
                                 .map(Student::getService)
                                 .orElse(null);
     }
+
+    @Override
+    public List<String> getStudentsWhoseNameStartsWith(String letter) {
+        logger.info("Called method getStudentsWhoseNameStartWith");
+        return studentRepository.findAll().stream()
+                .parallel()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(name -> name.startsWith(letter.toUpperCase()))
+                .toList();
+    }
+
+    @Override
+    public Double getAverageAgeStudents() {
+        logger.info("Called method getAverageAgeStudents");
+        return studentRepository.findAll().stream()
+                .parallel()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0.0);
+    }
+
+    @Override
+    public Long getLongValue() {
+        long start = System.currentTimeMillis();
+        long result = 0;
+        for (int i = 1; i <= 1_000_000; i++) {
+            result = result + i;
+        }
+        logger.info(result + " Время выполнения - " + (System.currentTimeMillis() - start + " миллисек"));
+        return result;
+    }
 }
